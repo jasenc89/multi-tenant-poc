@@ -1,5 +1,4 @@
-import { User } from "@interfaces/index";
-import { Company } from "@interfaces/index";
+import { User, Company } from "@interfaces/index";
 
 export const userDetails: User[] = [
   {
