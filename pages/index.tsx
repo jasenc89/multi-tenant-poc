@@ -1,3 +1,4 @@
+import axios from "axios";
 import type { NextPage } from "next";
 import { MouseEvent, useState } from "react";
 
@@ -6,8 +7,25 @@ const Home: NextPage = () => {
     username: "",
     password: "",
   });
+  const [error, setError] = useState<string>("");
 
-  const handleLogin = () => {};
+  const handleLogin = () => {
+    if (!loginDetails.username || !loginDetails.password) {
+      setError("You must enter a username and password");
+      return;
+    }
+
+    setError("");
+    axios
+      .post("/api/loginAuth", loginDetails)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(err.response.data.message);
+      });
+  };
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center bg-yellow-300">
@@ -30,7 +48,11 @@ const Home: NextPage = () => {
             setLoginDetails({ ...loginDetails, password: e.target.value })
           }
         ></input>
-        <button className="mt-6 bg-yellow-300 rounded-md py-2 w-1/2 mx-auto shadow-md text-black hover:bg-yellow-400 transition duration-300">
+        {error && <p className="mt-4 text-yellow-400 text-center">{error}</p>}
+        <button
+          className="mt-6 bg-yellow-300 rounded-md py-2 w-1/2 mx-auto shadow-md text-black hover:bg-yellow-400 transition duration-300"
+          onClick={handleLogin}
+        >
           Log in
         </button>
       </div>
