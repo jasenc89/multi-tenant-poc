@@ -1,6 +1,7 @@
-import axios from "axios";
 import type { NextPage } from "next";
-import { MouseEvent, useState } from "react";
+import Router from "next/router";
+import axios from "axios";
+import { useState } from "react";
 
 const Home: NextPage = () => {
   const [loginDetails, setLoginDetails] = useState({
@@ -20,6 +21,9 @@ const Home: NextPage = () => {
       .post("/api/loginAuth", loginDetails)
       .then((res) => {
         console.log(res.data);
+        if (res.status === 200) {
+          Router.push("/dashboard");
+        }
       })
       .catch((err) => {
         console.error(err);
