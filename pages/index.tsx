@@ -2,10 +2,24 @@ import type { NextPage } from "next";
 
 const Home: NextPage = () => {
   return (
-    <div className="h-screen w-screen flex justify-center items-center">
-      <h1 className="w-1/8 shadow-lg p-12 border-2">
-        Next JS App configured with TypeScript & Tailwind CSS
-      </h1>
+    <div className="h-screen w-screen flex flex-col justify-center items-center bg-yellow-300">
+      <h1 className="text-5xl mb-2 tracking-wide"> LEM🍋N</h1>
+      <p className="text-2xl mb-4 tracking-wide">Software solutions</p>
+      <div className="w-1/8 shadow-xl p-12 flex flex-col rounded-md bg-black text-white">
+        <label>Username:</label>
+        <input
+          type="text"
+          className="border-2 mb-4 p-1 rounded-md text-black"
+        ></input>
+        <label>Password:</label>
+        <input
+          type="password"
+          className="border-2 p-1 rounded-md text-black "
+        ></input>
+        <button className="mt-6 bg-yellow-300 rounded-md py-2 w-1/2 mx-auto shadow-md text-black hover:bg-yellow-400 transition duration-300">
+          Log in
+        </button>
+      </div>
     </div>
   );
 };
