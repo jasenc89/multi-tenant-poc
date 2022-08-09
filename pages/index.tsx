@@ -1,6 +1,14 @@
 import type { NextPage } from "next";
+import { MouseEvent, useState } from "react";
 
 const Home: NextPage = () => {
+  const [loginDetails, setLoginDetails] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleLogin = () => {};
+
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center bg-yellow-300">
       <h1 className="text-5xl mb-2 tracking-wide"> LEM🍋N</h1>
@@ -10,11 +18,17 @@ const Home: NextPage = () => {
         <input
           type="text"
           className="border-2 mb-4 p-1 rounded-md text-black"
+          onChange={(e) =>
+            setLoginDetails({ ...loginDetails, username: e.target.value })
+          }
         ></input>
         <label>Password:</label>
         <input
           type="password"
           className="border-2 p-1 rounded-md text-black "
+          onChange={(e) =>
+            setLoginDetails({ ...loginDetails, password: e.target.value })
+          }
         ></input>
         <button className="mt-6 bg-yellow-300 rounded-md py-2 w-1/2 mx-auto shadow-md text-black hover:bg-yellow-400 transition duration-300">
           Log in
