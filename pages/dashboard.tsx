@@ -1,7 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import Router from "next/router";
+import axios from "axios";
 
 const Dashboard = ({ token }: { token?: any }) => {
   const companyInfo = JSON.parse(token);
+
+  const handleLogout = () => {
+    axios.post("/api/logout").then((res) => {
+      console.log(res.data);
+      Router.push("/");
+    });
+  };
 
   return (
     <div className="min-h-screen w-screen bg-yellow-400">
@@ -9,7 +18,10 @@ const Dashboard = ({ token }: { token?: any }) => {
         <div className="text-white text-5xl tracking-wide">
           {companyInfo.name}
         </div>
-        <button className=" bg-yellow-300 rounded-md py-1 px-4 text-black hover:bg-yellow-400 transition duration-300">
+        <button
+          className=" bg-yellow-300 rounded-md py-1 px-4 text-black hover:bg-yellow-400 transition duration-300"
+          onClick={handleLogout}
+        >
           Log Out
         </button>
       </div>
