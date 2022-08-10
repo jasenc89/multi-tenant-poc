@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import cookie from "cookie";
 import { User, Company } from "@interfaces/index";
 import { userDetails, companyDetails } from "../../utils/data";
 
