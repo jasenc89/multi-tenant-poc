@@ -9,7 +9,17 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
   for (let i = 0; i < userDetails.length; i++) {
     if (userDetails[i].username === username) {
       if (userDetails[i].password === password) {
-        res.status(200).json({ message: userDetails[i] });
+        res.setHeader(
+          "Set-Cookie",
+          cookie.serialize("token", JSON.stringify(userDetails[i]), {
+            httpOnly: true,
+            secure: process.env.NODE_ENV !== "development",
+            maxAge: 60 * 60 * 24,
+            sameSite: "strict",
+            path: "/",
+          })
+        );
+        res.status(200).json({ message: "Login successful" });
         return;
       } else {
         res.status(400).json({ message: "Incorrect password" });

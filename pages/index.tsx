@@ -33,7 +33,7 @@ const Home: NextPage = () => {
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center bg-yellow-300">
-      <h1 className="text-5xl mb-2 tracking-wide"> LEM🍋N</h1>
+      <h1 className="text-5xl mb-2 tracking-wide">LEM🍋N</h1>
       <p className="text-2xl mb-4 tracking-wide">Software solutions</p>
       <div
         className={`w-[24rem] shadow-xl p-12 flex flex-col rounded-md bg-black text-white ${
