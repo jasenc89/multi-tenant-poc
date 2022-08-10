@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import cookie from "cookie";
-import { User, Company } from "@interfaces/index";
 import { userDetails, companyDetails } from "../../utils/data";
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
@@ -9,16 +8,21 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
   for (let i = 0; i < userDetails.length; i++) {
     if (userDetails[i].username === username) {
       if (userDetails[i].password === password) {
-        res.setHeader(
-          "Set-Cookie",
-          cookie.serialize("token", JSON.stringify(userDetails[i]), {
-            httpOnly: true,
-            secure: process.env.NODE_ENV !== "development",
-            maxAge: 60 * 60 * 24,
-            sameSite: "strict",
-            path: "/",
-          })
-        );
+        for (let j = 0; j < companyDetails.length; j++) {
+          if (userDetails[i].company === companyDetails[j].name)
+            res.setHeader(
+              "Set-Cookie",
+              cookie.serialize("token", JSON.stringify(companyDetails[j]), {
+                httpOnly: true,
+                secure: process.env.NODE_ENV !== "development",
+                maxAge: 60 * 60 * 24,
+                sameSite: "strict",
+                path: "/",
+              })
+            );
+          break;
+        }
+
         res.status(200).json({ message: "Login successful" });
         return;
       } else {
